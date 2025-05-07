@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aghasha Rudolph - Portofolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            /* Removed overflow:hidden to allow scrolling on the home page */
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hamburger Icon Styling */
+        .hamburger-icon {
+            display: block;
+            width: 25px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        
+        .hamburger-icon span:nth-child(1) {
+            top: 0px;
+        }
+        
+        .hamburger-icon span:nth-child(2) {
+            top: 8px;
+        }
+        
+        .hamburger-icon span:nth-child(3) {
+            top: 16px;
+        }
+        
+        /* Transformation for X */
+        .hamburger.active .hamburger-icon span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+        
+        .hamburger.active .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+        
+        .hamburger.active .hamburger-icon span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        nav ul li a:hover {
+            color: #cccccc;
+        }
+        
+        nav ul li a.active-nav {
+            color: #cccccc;
+            border-bottom: 2px solid white;
+        }
+        
+        /* Section styling - modified to support proper scrolling */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 80px 0 20px; 
+            display: none; 
+            overflow-y: auto; 
+            height: 100vh; 
+        }
+        
+        /* Only show active section */
+        section.active {
+            display: block;
+        }
+        
+        /* Home section - now scrollable */
+        #home {
+            background-color: #000000;
+            color: white;
+            position: relative;
+            overflow-y: auto; 
+            margin-bottom: 60px;
+        }
+        
+        /* Enhanced Falling stars animation */
+        .night {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            transform: rotateZ(45deg);
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none; 
+        }
+
+        .shooting_star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+            animation: tail 3000ms ease-in-out infinite, shooting 3000ms ease-in-out infinite;
+        }
+
+        .shooting_star::before {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+            transform: translateX(50%) rotateZ(45deg);
+            border-radius: 100%;
+            animation: shining 3000ms ease-in-out infinite;
+        }
+
+        .shooting_star::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+            transform: translateX(50%) rotateZ(-45deg);
+            border-radius: 100%;
+            animation: shining 3000ms ease-in-out infinite;
+        }
+
+        @keyframes tail {
+            0% {
+                width: 0;
+            }
+            30% {
+                width: 100px;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+        @keyframes shining {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 30px;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+        @keyframes shooting {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(300px);
+            }
+        }
+
+        /* Star positions */
+        .shooting_star:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0ms;
+        }
+
+        .shooting_star:nth-child(2) {
+            top: 25%;
+            left: 15%;
+            animation-delay: 1000ms;
+        }
+
+        .shooting_star:nth-child(3) {
+            top: 40%;
+            left: 10%;
+            animation-delay: 1500ms;
+        }
+
+        .shooting_star:nth-child(4) {
+            top: 55%;
+            left: 5%;
+            animation-delay: 2000ms;
+        }
+
+        .shooting_star:nth-child(5) {
+            top: 70%;
+            left: 25%;
+            animation-delay: 2500ms;
+        }
+
+        .shooting_star:nth-child(6) {
+            top: 85%;
+            left: 20%;
+            animation-delay: 3000ms;
+        }
+
+        .shooting_star:nth-child(7) {
+            top: 15%;
+            left: 35%;
+            animation-delay: 500ms;
+        }
+
+        .shooting_star:nth-child(8) {
+            top: 30%;
+            left: 40%;
+            animation-delay: 1200ms;
+        }
+
+        .shooting_star:nth-child(9) {
+            top: 45%;
+            left: 45%;
+            animation-delay: 1700ms;
+        }
+
+        .shooting_star:nth-child(10) {
+            top: 60%;
+            left: 50%;
+            animation-delay: 2200ms;
+        }
+
+        .shooting_star:nth-child(11) {
+            top: 75%;
+            left: 55%;
+            animation-delay: 2700ms;
+        }
+
+        .shooting_star:nth-child(12) {
+            top: 90%;
+            left: 60%;
+            animation-delay: 3200ms;
+        }
+
+        .shooting_star:nth-child(13) {
+            top: 20%;
+            left: 65%;
+            animation-delay: 700ms;
+        }
+
+        .shooting_star:nth-child(14) {
+            top: 35%;
+            left: 70%;
+            animation-delay: 1400ms;
+        }
+
+        .shooting_star:nth-child(15) {
+            top: 50%;
+            left: 75%;
+            animation-delay: 1900ms;
+        }
+        
+        .hero-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            z-index: 10;
+            padding-top: 60px; 
+            padding-top: 100px;
+            margin-bottom: 500px;
+        }
+        
+        .hero-text {
+            text-align: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
+        
+        .hero-text p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-img {
+            margin-left: 40px;
+        }
+        
+        .hero-img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+        }
+        
+        /* Social Media Icons for Home */
+        .social-icons-home {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            background-color: white;
+            color: black;
+            transform: translateY(-5px);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: white;
+            color: black;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 30px; 
+            margin-bottom: 60px; 
+            padding-top: 60px; 
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px; 
+            margin-bottom: 50px; 
+        }
+        
+        .about-img {
+            flex: 1;
+            margin-right: 50px;
+        }
+        
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .skill-item {
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #projects {
+            background-color: #111111;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-bottom: 50px; 
+        }
+        
+        .project-card {
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(255, 255, 255, 0.2);
+        }
+        
+        .project-img {
+            height: 200px;
+            width: 100%;
+            background-color: #ddd;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 10px;
+        }
+        
+        #gallery {
+            background-color: #0a0a0a;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-bottom: 50px; 
+            margin-top: 20px; 
+        }
+        
+        .gallery-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .gallery-img {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-card:hover .gallery-img img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-content {
+            padding: 20px;
+        }
+        
+        .gallery-content h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        
+        .gallery-content p {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Contact section with social icons */
+        #contact {
+            background-color: #050505;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 30px; 
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Social Media section in Contact */
+        .contact-social {
+            margin-top: 40px;
+            text-align: center;
+            margin-top: 60px; 
+            margin-bottom: 60px;
+        }
+        
+        .contact-social h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap; 
+        }
+        
+        .social-icon-contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon-contact .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .social-icon-contact:hover .icon {
+            background-color: white;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .social-icon-contact span {
+            font-size: 14px;
+        }
+        
+        footer {
+            background-color: #000000;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
+        /* Page transition effect */
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Font Awesome style replacement */
+        .fa {
+            font-style: normal;
+            font-weight: normal;
+            display: inline-block;
+        }
+        
+        .fa-linkedin:before {
+            content: "in";
+            font-weight: bold;
+        }
+        
+        .fa-discord:before {
+            content: "# ";
+            font-weight: bold;
+        }
+        
+        .fa-instagram:before {
+            content: "📷";
+        }
+        
+        .fa-github:before {
+            content: "GH";
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 250px;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                padding: 80px 20px 20px;
+                transition: 0.3s ease-in-out;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-img {
+                margin-left: 0;
+                margin-top: 30px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-img {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            /* Adjust content for better mobile viewing */
+            section {
+                padding-top: 70px;
+                overflow-y: auto; 
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .social-icons {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">A.R</div>
+                <button class="hamburger" id="hamburger-btn">
+                    <div class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="#home" class="nav-link active-nav" data-target="home">Home</a></li>
+                        <li><a href="#about" class="nav-link" data-target="about">About Me</a></li>
+                        <li><a href="#gallery" class="nav-link" data-target="gallery">Gallery</a></li>
+                        <li><a href="#projects" class="nav-link" data-target="projects">Project</a></li>
+                        <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="active">
+        <div class="night">
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+            <div class="shooting_star"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>PORTOFOLIO</h1>
+                    <p>Aghasha Rudolph</p>
+                    <!-- Replaced Contact Me button with social media icons -->
+                    <div class="social-icons-home">
+                     </div>
+                </div>
+                <div class="hero-img">
+                    <img src="dist/Profile.jpg" alt="Aghasha Rudolph">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Added About section content inside Home for scrolling -->
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Know me more personally.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="dist/FotoGW.jpg" alt="Aghasha Rudolph">
+                </div>
+                <div class="about-text">
+                    <h3>Profesional System Information</h3>
+                    <p>I am a professional in the field of Information Systems, with a focus on developing efficient and innovative technology solutions. With deep knowledge of various information technologies, I help organizations optimize their business processes through the implementation of the right systems.</p>
+                    <p>I have expertise in system requirements analysis, database design, and application development. My approach is to thoroughly understand the business needs before implementing any technological solution.</p>
+                    <div class="skills">
+                        <span class="skill-item">Analyst System</span>
+                        <span class="skill-item">Database Management</span>
+                        <span class="skill-item">Business Intelligence</span>
+                        <span class="skill-item">Project Management</span>
+                        <span class="skill-item">Web Development</span>
+                        <span class="skill-item">Data Analyst</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Added Gallery section content inside Home for scrolling -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>A showcase of my selected works</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <div class="gallery-img">
+                        <img src="dist/EidFIT.jpg" alt="Web Design Project">
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Eid Outfit Concept Design</h3>
+                        <p>A conceptual exploration of ceremonial outfits inspired by dark fantasy themes. These designs integrate traditional Eid attire with gothic elements, emphasizing silhouette, texture, and cultural symbolism in a fantasy setting.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-img">
+                        <img src="dist/EIDFIT2.jpg" alt="Mobile App Design">
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Dark Eid Character Set</h3>
+                        <p>A stylized character design project presenting unique Eid-inspired outfits within a dark and atmospheric narrative world. Each costume is crafted to reflect mystery, reverence, and artistic reinterpretation of festive fashion in a fictional universe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Added Projects section content inside Home for scrolling -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+                <p>Some of my best works</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="" alt="Project 1">
+                    </div>
+                    <div class="project-content">
+                        <h3>Inventory Management System</h3>
+                        <p>Development of an integrated inventory management system for medium-sized manufacturing companies with real-time tracking and predictive analysis features.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/200" alt="Project 2">
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Learning Platform</h3>
+                        <p>Design and implementation of a responsive e-learning platform with adaptive learning features and automated assessment integration.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/200" alt="Project 3">
+                    </div>
+                    <div class="project-content">
+                        <h3>Health Tracking Mobile App</h3>
+                        <p>Design and development of a mobile application for tracking health metrics with personalized insights and progress visualization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+        <!-- Added Contact section content inside Home for scrolling -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>Let's connect</p>
+            </div>
+            
+            <!-- Social Media Icons in Contact section -->
+            <div class="contact-social">
+                <h3>Connect With Me</h3>
+                <div class="social-icons">
+                    <a href="www.linkedin.com/in/aghasha-rudolph-23bb78292" class="social-icon-contact" target="_blank">
+                        <div class="icon">
+                            <i class="fa fa-linkedin"></i>
+                        </div>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://discord.com/users/787335381929820161" class="social-icon-contact" target="_blank">
+                        <div class="icon">
+                            <i class="fa fa-discord"></i>
+                        </div>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://www.instagram.com/ghash_rdlph/" class="social-icon-contact" target="_blank">
+                        <div class="icon">
+                            <i class="fa fa-instagram"></i>
+                        </div>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Aghasha Rudolph. Copyright protected.</p>
+                <div class="social-links">
+                    <a href="https://discord.com/users/your_id" target="_blank"><i class="fa fa-discord"></i> Discord</a>
+                    <a href="https://instagram.com/ghashadiecast" target="_blank"><i class="fa fa-instagram"></i> Instagram</a>
+                    <a href="https://github.com/aghasha" target="_blank"><i class="fa fa-github"></i> GitHub</a>
+                    <a href="https://linkedin.com/in/aghasha" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <!-- About section as separate page -->
+<section id="about">
+    <div class="container">
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>Know me more personally.</p>
+        </div>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="dist/FotoGW.jpg" alt="Aghasha Rudolph">
+            </div>
+            <div class="about-text">
+                <h3>Professional System Information</h3>
+                <p>I am a professional in the field of Information Systems, with a focus on developing efficient and innovative technology solutions. With deep knowledge of various information technologies, I help organizations optimize their business processes through the implementation of the right systems.</p>
+                <p>I have expertise in system requirements analysis, database design, and application development. My approach is to thoroughly understand the business needs before implementing any technological solution.</p>
+                <div class="skills">
+                    <span class="skill-item">Analyst System</span>
+                    <span class="skill-item">Database Management</span>
+                    <span class="skill-item">Business Intelligence</span>
+                    <span class="skill-item">Project Management</span>
+                    <span class="skill-item">Web Development</span>
+                    <span class="skill-item">Data Analyst</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery section as separate page -->
+<section id="gallery">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gallery</h2>
+            <p>A showcase of my selected works</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <div class="gallery-img">
+                    <img src="/api/placeholder/400/300" alt="Web Design Project">
+                </div>
+                <div class="gallery-content">
+                    <h3>Corporate Website Redesign</h3>
+                    <p>Modern redesign of a financial institution's website with improved user experience and responsive layout.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img">
+                    <img src="/api/placeholder/400/300" alt="Mobile App Design">
+                </div>
+                <div class="gallery-content">
+                    <h3>Health Tracking Mobile App</h3>
+                    <p>UI/UX design for a comprehensive health tracking application with intuitive data visualization features.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img">
+                    <img src="/api/placeholder/400/300" alt="Data Dashboard">
+                </div>
+                <div class="gallery-content">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Interactive data visualization dashboard for business metrics with real-time updates and custom filtering options.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img">
+                    <img src="/api/placeholder/400/300" alt="E-commerce Website">
+                </div>
+                <div class="gallery-content">
+                    <h3>E-commerce Platform</h3>
+                    <p>Fully responsive e-commerce site with integrated payment processing and inventory management system.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects section as separate page -->
+<section id="projects">
+    <div class="container">
+        <div class="section-title">
+            <h2>Projects</h2>
+            <p>Some of my best works</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="/api/placeholder/400/200" alt="Project 1">
+                </div>
+                <div class="project-content">
+                    <h3>Inventory Management System</h3>
+                    <p>Development of an integrated inventory management system for medium-sized manufacturing companies with real-time tracking and predictive analysis features.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="/api/placeholder/400/200" alt="Project 2">
+                </div>
+                <div class="project-content">
+                    <h3>E-Learning Platform</h3>
+                    <p>Design and implementation of a responsive e-learning platform with adaptive learning features and automated assessment integration.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="/api/placeholder/400/200" alt="Project 3">
+                </div>
+                <div class="project-content">
+                    <h3>Hospital Management System</h3>
+                    <p>Comprehensive hospital administration system with patient records, appointment scheduling, and billing integration designed for regional healthcare networks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact section as separate page -->
+<section id="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Contact</h2>
+            <p>Let's connect</p>
+        </div>
+        
+        <div class="contact-form">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+        
+        <!-- Social Media Icons in Contact section -->
+        <div class="contact-social">
+            <h3>Connect With Me</h3>
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/aghasha" class="social-icon-contact" target="_blank">
+                    <div class="icon">
+                        <i class="fa fa-linkedin"></i>
+                    </div>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://discord.com/users/your_id" class="social-icon-contact" target="_blank">
+                    <div class="icon">
+                        <i class="fa fa-discord"></i>
+                    </div>
+                    <span>Discord</span>
+                </a>
+                <a href="https://instagram.com/ghashadiecast" class="social-icon-contact" target="_blank">
+                    <div class="icon">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://github.com/aghasha" class="social-icon-contact" target="_blank">
+                    <div class="icon">
+                        <i class="fa fa-github"></i>
+                    </div>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        
+        // Function to activate a specific section
+        function activateSection(sectionId) {
+            // Hide all sections
+            sections.forEach(section => {
+                section.classList.remove('active');
+                section.classList.remove('page-transition');
+            });
+            
+            // Show the selected section with transition
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+                activeSection.classList.add('page-transition');
+                
+                // Update nav links
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-target') === sectionId) {
+                        link.classList.add('active-nav');
+                    } else {
+                        link.classList.remove('active-nav');
+                    }
+                });
+                
+                // Scroll to top of the section
+                activeSection.scrollTop = 0;
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        }
+        
+        // Event listeners for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = this.getAttribute('data-target');
+                activateSection(targetSection);
+            });
+        });
+        
+        // Hamburger menu toggle
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // Handle hash changes for direct links
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                activateSection(hash);
+            }
+        });
+        
+        // Check for hash in URL on page load
+        if (window.location.hash) {
+            const hash = window.location.hash.substring(1);
+            activateSection(hash);
+        }
+    });
+</script>
+</body>
+</html>
